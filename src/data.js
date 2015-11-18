@@ -36,7 +36,7 @@ var squareBonuses =
  */
 var defaultSquares = squareBonuses.map(function (bonus) {
     return makeSquare(null, bonus);
-})
+});
 
 module.exports = function (cfg) {
 
