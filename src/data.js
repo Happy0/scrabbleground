@@ -41,7 +41,8 @@ var defaultSquares = squareBonuses.map(function (bonus) {
 module.exports = function (cfg) {
 
     var defaults = {
-        squares : defaultSquares
+        squares : defaultSquares,
+        viewOnly : false // e.g. spectating or not the user's turn
     }
 
     // Merge any specified configuration values with our defaults before returning
