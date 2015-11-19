@@ -20,7 +20,11 @@ function renderBoard(ctrl) {
         // Index from 0
         var x = allPositions[0] - 1;
         var y = allPositions[1] - 1;
-        var square = renderSquare(x, y);
+        var square = ctrl.data.board[x][y];
+        square.x = x;
+        square.y = y;
+
+        var square = renderSquare(x, y, square);
 
         children.put(square);
     }
@@ -29,8 +33,15 @@ function renderBoard(ctrl) {
 }
 
 
-function renderSquare(square) {
+function renderSquare(x, y, square) {
+    var attrs = {
+        style : {
+            left : x * 6.66667 + '%'
+            bottom : y * 6.66667 + '%'
+        }
+    }
 
+    return m("div", attrs, "[" + x + "]" + "[" + y + "]")
 }
 
 module.exports = function(ctrl) {
