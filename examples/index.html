@@ -1,6 +1,12 @@
 <html>
+    <div id="sg1">
+
+    </div>
+
     <script src="../scrabbleground.js"></script>
     <script>
-        var ground = Scrabbleground(document, {});
+        (function() {
+            var ground = Scrabbleground(document.getElementById("sg1"), {});
+        })();
     </script>
 </html>
