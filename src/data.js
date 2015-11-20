@@ -1,4 +1,4 @@
-require("./configure")
+var configure = require("./configure")
 
 var makeTile = function(letter, value) {
     return {
@@ -41,7 +41,7 @@ var defaultSquares = squareBonuses.map(function (bonus) {
 module.exports = function (cfg) {
 
     var defaults = {
-        squares : defaultSquares,
+        board : defaultSquares,
         viewOnly : false // e.g. spectating or not the user's turn
     }
 

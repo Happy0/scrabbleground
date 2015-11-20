@@ -1,3 +1,4 @@
+var m = require("mithril");
 var api = require('./api.js');
 var ctrl = require("./ctrl.js");
 var view = require ("./view.js");

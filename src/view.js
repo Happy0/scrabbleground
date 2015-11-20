@@ -41,7 +41,7 @@ function renderSquare(x, y, square) {
         }
     }
 
-    return m("div", attrs, "[" + x + "]" + "[" + y + "]")
+    return m("div", attrs, "[" + x + "]" + "[" + y + "]");
 }
 
 module.exports = function(ctrl) {
