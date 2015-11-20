@@ -3,6 +3,12 @@
     "version" : "0.0.1",
     "description" : "A scrabble UI library",
     "main" : "src/main.js",
+    "devDependencies": {
+        "browserify": "~9.0.8",
+        "gulp": "~3.9.0",
+        "gulp-util": "~3.0.4",
+        "vinyl-source-stream": "~1.1.0"
+    },
     "dependencies" : {
         "merge": "1.2.0",
         "mithril" : "0.2.0"
