@@ -22,13 +22,10 @@ function renderBoard(ctrl) {
         // Index from 0
         var x = allPositions[i][0] - 1;
         var y = allPositions[i][1] - 1;
-        var square = ctrl.data.board[x][y];
-        square.x = x;
-        square.y = y;
+        var squareData = ctrl.data.board[x][y];
+        var squareRender = renderSquare(x, y, squareData);
 
-        var square = renderSquare(x, y, square);
-
-        children.push(square);
+        children.push(squareRender);
     }
 
     return children;
