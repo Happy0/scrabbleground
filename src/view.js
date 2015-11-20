@@ -36,7 +36,7 @@ function renderBoard(ctrl) {
 function renderSquare(x, y, square) {
     var attrs = {
         style : {
-            left : x * 6.66667 + '%'
+            left : x * 6.66667 + '%',
             bottom : y * 6.66667 + '%'
         }
     }
