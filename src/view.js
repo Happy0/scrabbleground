@@ -1,3 +1,5 @@
+var m = require("mithril");
+
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
 
@@ -18,20 +20,19 @@ function renderBoard(ctrl) {
 
     for (var i = 0; i < allPositions.length; i++) {
         // Index from 0
-        var x = allPositions[0] - 1;
-        var y = allPositions[1] - 1;
+        var x = allPositions[i][0] - 1;
+        var y = allPositions[i][1] - 1;
         var square = ctrl.data.board[x][y];
         square.x = x;
         square.y = y;
 
         var square = renderSquare(x, y, square);
 
-        children.put(square);
+        children.push(square);
     }
 
     return children;
 }
-
 
 function renderSquare(x, y, square) {
     var attrs = {

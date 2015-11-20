@@ -34,8 +34,10 @@ var squareBonuses =
 /**
  *  Create an empty board
  */
-var defaultSquares = squareBonuses.map(function (bonus) {
-    return makeSquare(null, bonus);
+var defaultSquares = squareBonuses.map(function (row) {
+    return row.map(function(bonus) {
+        return makeSquare(null, bonus);
+    })
 });
 
 module.exports = function (cfg) {
