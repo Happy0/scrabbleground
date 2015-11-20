@@ -35,16 +35,16 @@ function renderSquare(x, y, square) {
     var attrs = {
         style : {
             left : x * 6.66667 + '%',
-            bottom : y * 6.66667 + '%'
+            bottom : y * 6.66667 + '%',
         }
     }
 
-    return m("div", attrs, "[" + x + "]" + "[" + y + "]");
+    return m("square", attrs, " [" + x + "]" + "[" + y + "] ");
 }
 
 module.exports = function(ctrl) {
     return {
-        'tag' : 'div',
-        'children' : renderBoard(ctrl)
+       tag : 'div',
+       children : renderBoard(ctrl)
     }
 }
