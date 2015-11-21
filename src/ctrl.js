@@ -7,6 +7,8 @@ module.exports = function(cfg) {
     var setSquare = function(x, y, tile) {
       data.board[x][y].tile = tile;
       m.redraw();
+
+      data.board[x][y].bonus="baws";
       console.dir(data.board);
     }
 
