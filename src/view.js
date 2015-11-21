@@ -35,15 +35,37 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
+var squareClasses = {
+    "N" : 'normal',
+    'DL' : 'double-letter',
+    'TL' : 'triple-letter',
+    'DW' : 'double-word',
+    'TW' : 'triple-word'
+};
+
+var bonusText = {
+    "N" : '',
+    'DL' : '2L',
+    'TL' : '3L',
+    'DW' : '2W',
+    'TW' : '3W'
+}
+
 function renderSquare(x, y, square) {
+    var classes = [squareClasses[square.bonus]];
+
     var attrs = {
+        class: classes,
         style : {
             left : x * 6.66667 + '%',
-            bottom : y * 6.66667 + '%',
+            bottom : y * 6.66667 + '%'
         }
     };
 
-    return m("square", attrs, " [" + x + "]" + "[" + y + "] ");
+    var textClasses = ['square-text'];
+    var textDiv = m('div', {class: textClasses}, bonusText[square.bonus]);
+
+    return m("square", attrs, textDiv);
 }
 
 module.exports = function(ctrl) {
@@ -53,4 +75,4 @@ module.exports = function(ctrl) {
     };
 
     return m('div', attrs, renderBoard(ctrl));
-  }
+}
