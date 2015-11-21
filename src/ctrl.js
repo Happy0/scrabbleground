@@ -5,10 +5,9 @@ module.exports = function(cfg) {
     var data = d(cfg);
 
     var setSquare = function(x, y, tile) {
-      m.startComputation();
       data.board[x][y].tile = tile;
+      m.redraw();
       console.dir(data.board);
-      m.endComputation();
     }
 
     var exports =  {
