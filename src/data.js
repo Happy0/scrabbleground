@@ -1,19 +1,5 @@
 var configure = require("./configure")
 
-var makeTile = function(letter, value) {
-    return {
-        "letter" : letter,
-        "value" : value
-    };
-}
-
-var makeSquare = function(tile, bonus) {
-    return {
-        "tile" : tile,
-        "bonus" : bonus
-    };
-}
-
 var squareBonuses =
         [["TW","N","N","DL","N","N","N","TW","N","N","N","DL","N","N","TW"]
        ,["N","DW","N","N","N","TL","N","N","N","TL","N","N","N","DW","N"]
@@ -31,10 +17,24 @@ var squareBonuses =
        ,["N","DW","N","N","N","TL","N","N","N","TL","N","N","N","DW","N"]
        ,["TW","N","N","DL","N","N","N","TW","N","N","N","DL","N","N","TW"]];
 
+var makeTile = function(letter, value) {
+    return {
+        "letter" : letter,
+        "value" : value
+    };
+}
+
+var makeSquare = function(tile, bonus) {
+    return {
+        "tile" : tile,
+        "bonus" : bonus
+    };
+}
+
 /**
  *  Create an empty board
  */
-var defaultSquares = squareBonuses.map(function (row) {
+var board = squareBonuses.map(function (row) {
     return row.map(function(bonus) {
         return makeSquare(null, bonus);
     })
@@ -43,7 +43,7 @@ var defaultSquares = squareBonuses.map(function (row) {
 module.exports = function (cfg) {
 
     var defaults = {
-        board : defaultSquares,
+        board : board,
         viewOnly : false // e.g. spectating or not the user's turn
     }
 

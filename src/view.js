@@ -3,6 +3,23 @@ var m = require("mithril");
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
 
+var squareClasses = {
+    "N" : 'normal',
+    'DL' : 'double-letter',
+    'TL' : 'triple-letter',
+    'DW' : 'double-word',
+    'TW' : 'triple-word'
+};
+
+var bonusText = {
+    "N" : '',
+    'DL' : '2L',
+    'TL' : '3L',
+    'DW' : '2W',
+    'TW' : '3W'
+}
+
+
 // Compute once
 var allPositions = (function() {
     var positions = [];
@@ -35,20 +52,16 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
-var squareClasses = {
-    "N" : 'normal',
-    'DL' : 'double-letter',
-    'TL' : 'triple-letter',
-    'DW' : 'double-word',
-    'TW' : 'triple-word'
-};
+function renderTile(tile) {
+    var letter = tile.letter;
+    var value = tile.value;
 
-var bonusText = {
-    "N" : '',
-    'DL' : '2L',
-    'TL' : '3L',
-    'DW' : '2W',
-    'TW' : '3W'
+    return m('div', {class: ['tile', letter]}, [
+        m('div', {class: ['lettertext']}, letter),
+        m('div', {class: ['value']},
+            m('subscript', {}, value))]
+    )
+
 }
 
 function renderSquare(x, y, square) {
@@ -62,10 +75,16 @@ function renderSquare(x, y, square) {
         }
     };
 
-    var textClasses = ['square-text'];
-    var textDiv = m('div', {class: textClasses}, bonusText[square.bonus]);
-
-    return m("square", attrs, textDiv);
+    if (!square.tile) {
+        var textClasses = ['square-text'];
+        var squareText = m('div', {class: textClasses}, bonusText[square.bonus]);
+        return m("square", attrs, squareText);
+    }
+    else
+    {
+        // If the square is occupied by the tile, we return the tile as the child
+        return m("square", attrs, renderTile(square.tile));
+    }
 }
 
 module.exports = function(ctrl) {
