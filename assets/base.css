@@ -1,9 +1,9 @@
-sg-board-wrap {
+.sg-board-wrap {
     width: 100%;
     height: 100%;
 }
 
-sg-board {
+.sg-board {
     background-size: cover;
     width: 100%;
     height: 100%;
