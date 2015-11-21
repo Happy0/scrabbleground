@@ -16,7 +16,7 @@ var allPositions = (function() {
 })();
 
 function renderBoard(ctrl) {
-    var children = []
+    var childrenSquares = [];
 
     for (var i = 0; i < allPositions.length; i++) {
         // Index from 0
@@ -25,10 +25,14 @@ function renderBoard(ctrl) {
         var squareData = ctrl.data.board[x][y];
         var squareRender = renderSquare(x, y, squareData);
 
-        children.push(squareRender);
+        childrenSquares.push(squareRender);
     }
 
-    return children;
+    var attrs = {
+        class: 'sg-board'
+    };
+
+    return m('div', attrs, childrenSquares);
 }
 
 function renderSquare(x, y, square) {
@@ -37,14 +41,16 @@ function renderSquare(x, y, square) {
             left : x * 6.66667 + '%',
             bottom : y * 6.66667 + '%',
         }
-    }
+    };
 
     return m("square", attrs, " [" + x + "]" + "[" + y + "] ");
 }
 
 module.exports = function(ctrl) {
-    return {
-       tag : 'div',
-       children : renderBoard(ctrl)
-    }
-}
+    
+    var attrs = {
+        'class' : ['sg-board-wrap']
+    };
+
+    return m('div', attrs, renderBoard(ctrl));
+  }
