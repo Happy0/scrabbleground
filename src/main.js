@@ -4,11 +4,14 @@ var ctrl = require("./ctrl.js");
 var view = require ("./view.js");
 
 function init(element, config) {
-    var controller = new ctrl(config);
+    var c = new ctrl(config);
+    var v = view(c);
 
-    m.render(element, view(controller));
+    var component = {controller: function() { return c; }, view: function() { return v }} ;
 
-    return api(controller);
+    m.mount(element, component);
+
+    return api(c);
 }
 
 module.exports = init;
