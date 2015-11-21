@@ -56,9 +56,9 @@ function renderTile(tile) {
     var letter = tile.letter;
     var value = tile.value;
 
-    return m('div', {class: ['tile', letter]}, [
-        m('div', {class: ['lettertext']}, letter),
-        m('div', {class: ['value']},
+    return m('div', {class: 'tile letter'}, [
+        m('div', {class: 'lettertext'}, letter),
+        m('div', {class: 'value'},
             m('subscript', {}, value))]
     )
 
@@ -76,7 +76,7 @@ function renderSquare(x, y, square) {
     };
 
     if (!square.tile) {
-        var textClasses = ['square-text'];
+        var textClasses = 'square-text';
         var squareText = m('div', {class: textClasses}, bonusText[square.bonus]);
         return m("square", attrs, squareText);
     }
@@ -90,7 +90,7 @@ function renderSquare(x, y, square) {
 module.exports = function(ctrl) {
     
     var attrs = {
-        'class' : ['sg-board-wrap']
+        'class' : 'sg-board-wrap'
     };
 
     return m('div', attrs, renderBoard(ctrl));

@@ -52,7 +52,7 @@ square.triple-word {
 
 .tile.letter {
     font-weight: bold;
-    padding-left: 25%;
+    padding-left: 45%;
 }
 
 .tile.blank {
@@ -61,14 +61,14 @@ square.triple-word {
 }
 
 .lettertext {
-    font-size: 40%;
+    font-size: 95%;
     top: 50%;
     position: absolute;
 }
 
 .value {
-    padding-left: 33%;
-    font-size: 25%;
+    padding-left: 23%;
+    font-size: 75%;
     position: absolute;
-    padding-top:66%;
+    padding-top:75%;
 }
