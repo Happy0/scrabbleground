@@ -1,5 +1,6 @@
 var m = require("mithril");
-var jquery = require("jquery");
+var $ = require("jquery");
+require('jquery-ui/draggable')
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
@@ -65,8 +66,12 @@ var renderTile = function (tile) {
     )
 }
 
-var makeDraggable = function(element, init, context) {
+var makeDraggable = function(element, initialised, context) {
+    if (initialised) return;
 
+    $(element).draggable({start : function (event, ui) {
+        console.dir(ui);
+    }});
 };
 
 function renderSquare(x, y, square) {
