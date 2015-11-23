@@ -53,24 +53,28 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
-function renderTile(tile) {
+var renderTile = function (tile) {
     var letter = tile.letter;
     var value = tile.value;
 
-    return m('div', {class: 'tile letter', 'data-letter' : letter, 'data-value' : value}, [
+    return m('div', {config: makeDraggable, class: 'tile letter',
+             'data-letter' : letter, 'data-value' : value}, [
         m('div', {class: 'lettertext'}, letter),
         m('div', {class: 'value'},
             m('subscript', {}, value))]
     )
-
 }
+
+var makeDraggable = function(element, init, context) {
+
+};
 
 function renderSquare(x, y, square) {
     var classes = [squareClasses[square.bonus]];
 
     var attrs = {
-        'data-pos-x' : x,
-        'data-pos-y': y,
+        'data-square-pos-x' : x,
+        'data-square-pos-y': y,
         class: classes,
         style : {
             left : x * 6.66667 + '%',
@@ -98,3 +102,6 @@ module.exports = function(ctrl) {
 
     return m('div', attrs, renderBoard(ctrl));
 }
+
+module.exports.renderTile = renderTile;
+
