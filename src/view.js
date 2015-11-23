@@ -42,7 +42,7 @@ function renderBoard(ctrl) {
         var x = allPositions[i][0] - 1;
         var y = allPositions[i][1] - 1;
         var squareData = ctrl.data.board[x][y];
-        var squareRender = renderSquare(x, y, squareData);
+        var squareRender = renderSquare(ctrl, x, y, squareData);
 
         childrenSquares.push(squareRender);
     }
@@ -54,27 +54,45 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
-var renderTile = function (tile) {
+var renderTile = function (ctrl, tile) {
     var letter = tile.letter;
     var value = tile.value;
 
-    return m('div', {config: makeDraggable, class: 'tile letter',
-             'data-letter' : letter, 'data-value' : value}, [
+    var makeDraggable = function(element, initialised, context) {
+
+        // Only candidate tiles (e.g. tiles being played) are draggable.
+        if (initialised || !tile.isCandidate) return;
+
+        var startDrag = function() {
+            if (tile.containingSquare) {
+                // If the tile was dragged from a square on the board,
+                // remove the contents of that square. Otherwise, assume
+                // it was dragged from a tile rack or similar
+                tile.containingSquare.tile = null;
+            }
+
+            ctrl.data.draggingTile = tile;
+        };
+
+        var stopDrag = function() {
+            // If the drag was stopped outside the boundaries of the board,
+            // we set 'draggingTile' to null. If not, it's the responsibility of
+            // the 'droppable' listener to do so
+            console.info("Stop drag~");
+        }
+
+        $(element).draggable({start : startDrag, stop: stopDrag});
+    };
+
+    return m('div', {config: makeDraggable, class: 'tile letter'}, [
         m('div', {class: 'lettertext'}, letter),
         m('div', {class: 'value'},
-            m('subscript', {}, value))]
+            m('subscript', {}, value))
+        ]
     )
 }
 
-var makeDraggable = function(element, initialised, context) {
-    if (initialised) return;
-
-    $(element).draggable({start : function (event, ui) {
-        console.dir(ui);
-    }});
-};
-
-function renderSquare(x, y, square) {
+function renderSquare(ctrl, x, y, square) {
     var classes = [squareClasses[square.bonus]];
 
     var attrs = {
@@ -95,7 +113,7 @@ function renderSquare(x, y, square) {
     else
     {
         // If the square is occupied by the tile, we return the tile as the child
-        return m("square", attrs, renderTile(square.tile));
+        return m("square", attrs, renderTile(ctrl, square.tile));
     }
 }
 
@@ -109,4 +127,3 @@ module.exports = function(ctrl) {
 }
 
 module.exports.renderTile = renderTile;
-

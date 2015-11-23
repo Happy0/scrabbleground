@@ -33,10 +33,16 @@ var makeTile = function(letter, value, isCandidate) {
 }
 
 var makeSquare = function(tile, bonus) {
-    return {
+    var square = {
         "tile" : tile,
         "bonus" : bonus
     };
+
+    if (tile) {
+        tile.containingSquare = square;
+    }
+
+    return square;
 }
 
 /**
@@ -53,7 +59,7 @@ module.exports = function (cfg) {
     var defaults = {
         board : board,
         viewOnly : false, // e.g. spectating or not the user's turn
-        currentlyDragging : null // The piece that is currently being dragged e.g. [0,3]
+        draggingTile : null // The tile  that is currently being dragged e.g. [0,3]
     };
 
     // Merge any specified configuration values with our defaults before returning
