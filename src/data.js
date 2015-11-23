@@ -59,7 +59,7 @@ module.exports = function (cfg) {
     var defaults = {
         board : board,
         viewOnly : false, // e.g. spectating or not the user's turn
-        draggingTile : null // The tile  that is currently being dragged e.g. [0,3]
+        draggingTile : null // The tile  that is currently being dragged
     };
 
     // Merge any specified configuration values with our defaults before returning
