@@ -1,4 +1,5 @@
 var m = require("mithril");
+var jquery = require("jquery");
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
@@ -56,7 +57,7 @@ function renderTile(tile) {
     var letter = tile.letter;
     var value = tile.value;
 
-    return m('div', {class: 'tile letter'}, [
+    return m('div', {class: 'tile letter', 'data-letter' : letter, 'data-value' : value}, [
         m('div', {class: 'lettertext'}, letter),
         m('div', {class: 'value'},
             m('subscript', {}, value))]

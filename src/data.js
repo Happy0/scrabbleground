@@ -52,8 +52,9 @@ module.exports = function (cfg) {
 
     var defaults = {
         board : board,
-        viewOnly : false // e.g. spectating or not the user's turn
-    }
+        viewOnly : false, // e.g. spectating or not the user's turn
+        currentlyDragging : null // The piece that is currently being dragged e.g. [0,3]
+    };
 
     // Merge any specified configuration values with our defaults before returning
     // the defaults
