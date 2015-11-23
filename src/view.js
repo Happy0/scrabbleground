@@ -68,6 +68,8 @@ function renderSquare(x, y, square) {
     var classes = [squareClasses[square.bonus]];
 
     var attrs = {
+        'data-pos-x' : x,
+        'data-pos-y': y,
         class: classes,
         style : {
             left : x * 6.66667 + '%',
@@ -88,7 +90,7 @@ function renderSquare(x, y, square) {
 }
 
 module.exports = function(ctrl) {
-    
+
     var attrs = {
         'class' : 'sg-board-wrap'
     };

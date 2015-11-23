@@ -17,11 +17,19 @@ var squareBonuses =
        ,["N","DW","N","N","N","TL","N","N","N","TL","N","N","N","DW","N"]
        ,["TW","N","N","DL","N","N","N","TW","N","N","N","DL","N","N","TW"]];
 
-var makeTile = function(letter, value) {
-    return {
-        "letter" : letter,
-        "value" : value
+var makeTile = function(letter, value, isCandidate) {
+    var tile = {
+        letter : letter,
+        value : value
     };
+
+    // Candidate tiles have not yet been committed and can be moved freely about
+    // the board
+    if (isCandidate) {
+        tile.isCandidate = true;
+    }
+
+    return tile;
 }
 
 var makeSquare = function(tile, bonus) {
