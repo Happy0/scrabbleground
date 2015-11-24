@@ -104,16 +104,17 @@ function renderSquare(ctrl, x, y, square) {
         }
     };
 
-    if (!square.tile) {
-        var textClasses = 'square-text';
-        var squareText = m('div', {class: textClasses}, bonusText[square.bonus]);
-        return m("square", attrs, squareText);
+    var textClasses = 'square-text';
+    var squareTextDiv = m('div', {class: textClasses}, bonusText[square.bonus]);
+
+    var squareChildren = [squareTextDiv];
+
+    if (square.tile) {
+        squareChildren.push(renderTile(ctrl, square.tile));
     }
-    else
-    {
-        // If the square is occupied by the tile, we return the tile as the child
-        return m("square", attrs, renderTile(ctrl, square.tile));
-    }
+
+    // If the square is occupied by the tile, we return the tile as the child
+    return m("square", attrs, squareChildren);
 }
 
 module.exports = function(ctrl) {
