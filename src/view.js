@@ -21,7 +21,6 @@ var bonusText = {
     'TW' : '3W'
 }
 
-
 // Compute once
 var allPositions = (function() {
     var positions = [];
