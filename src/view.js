@@ -74,10 +74,10 @@ var renderTile = function (ctrl, tile) {
         };
 
         var stopDrag = function() {
-            // If the drag was stopped outside the boundaries of the board,
-            // we set 'draggingTile' to null. If not, it's the responsibility of
-            // the 'droppable' listener to do so
-            console.info("Stop drag~");
+            // Jquery garauntees that event handlers are fired in the order that they were
+            // bound, so we can assume that the 'draggingTile' has already been used
+            // by the droppable listener
+            ctrl.data.draggingTile = null;
         }
 
         $(element).draggable({start : startDrag, stop: stopDrag});
