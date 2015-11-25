@@ -64,14 +64,14 @@ square.triple-word {
 }
 
 .lettertext {
-    font-size: 95%;
-    top: 50%;
+    top: 45%;
+    right: 50%;
     position: absolute;
 }
 
 .value {
-    padding-left: 23%;
+    padding-left: 55%;
     font-size: 75%;
     position: absolute;
-    padding-top:75%;
+    padding-top:65%;
 }
