@@ -63,13 +63,6 @@ var renderTile = function (ctrl, tile) {
         if (initialised || !tile.isCandidate) return;
 
         var startDrag = function() {
-            if (tile.containingSquare) {
-                // If the tile was dragged from a square on the board,
-                // remove the contents of that square. Otherwise, assume
-                // it was dragged from a tile rack or similar
-                tile.containingSquare.tile = null;
-            }
-
             ctrl.data.draggingTile = tile;
         };
 
@@ -80,7 +73,8 @@ var renderTile = function (ctrl, tile) {
             ctrl.data.draggingTile = null;
         }
 
-        $(element).draggable({start : startDrag, stop: stopDrag});
+        var revert = "invalid";
+        $(element).draggable({start : startDrag, stop: stopDrag, revert: revert});
     };
 
     return m('div', {config: makeDraggable, class: 'tile letter'}, [
