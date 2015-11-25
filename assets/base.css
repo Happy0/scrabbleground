@@ -45,6 +45,9 @@ square.triple-word {
 }
 
 .tile {
+    position: absolute;
+    top: 0px;
+    left : 0px;
     z-index: 100;
     width: 100% ;
     height: 100%;
@@ -53,7 +56,6 @@ square.triple-word {
 
 .tile.letter {
     font-weight: bold;
-    padding-left: 45%;
 }
 
 .tile.blank {
