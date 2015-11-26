@@ -66,12 +66,23 @@ var renderTile = function (ctrl, tile) {
             ctrl.data.draggingTile = tile;
         };
 
-        var stopDrag = function() {
+        var stopDrag = function(event, ui) {
+            console.dir(ui.helper.parent());
+            var parent = ui.helper.parent();
+            if (parent.is('square'))
+            {
+                // If the tile was dropped onto a square we let the drop handler for the square
+                // modify the board accordingly. Otherwise, we assume it was dropped on something
+                // like a rack and remove it from its previous square in the model
+                var square = tile.containingSquare;
+                ctrl.data.board[square.x][square.y].tile = null;
+            }
+
             // Jquery garauntees that event handlers are fired in the order that they were
             // bound, so we can assume that the 'draggingTile' has already been used
             // by the droppable listener
             ctrl.data.draggingTile = null;
-        }
+        };
 
         var revert = "invalid";
         $(element).draggable({start : startDrag, stop: stopDrag, revert: revert});

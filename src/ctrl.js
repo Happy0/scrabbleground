@@ -6,6 +6,7 @@ module.exports = function(cfg) {
 
     var setSquare = function(x, y, tile) {
       data.board[x][y].tile = tile;
+      tile.containingSquare = data.board[x][y];
       m.redraw();
     }
 
