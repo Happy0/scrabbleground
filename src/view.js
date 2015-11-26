@@ -69,7 +69,9 @@ var renderTile = function (ctrl, tile) {
         var stopDrag = function(event, ui) {
             console.dir(ui.helper.parent());
             var parent = ui.helper.parent();
-            if (parent.is('square'))
+
+            console.dir(parent);
+            if (!parent.hasClass('board-square'))
             {
                 // If the tile was dropped onto a square we let the drop handler for the square
                 // modify the board accordingly. Otherwise, we assume it was dropped on something
@@ -93,11 +95,11 @@ var renderTile = function (ctrl, tile) {
         m('div', {class: 'value'},
             m('subscript', {}, value))
         ]
-    )
+    );
 }
 
 function renderSquare(ctrl, x, y, square) {
-    var classes = [squareClasses[square.bonus]];
+    var classes = [squareClasses[square.bonus], 'board-square'].join(" ");
 
     var attrs = {
         'data-square-pos-x' : x,

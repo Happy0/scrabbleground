@@ -15,5 +15,5 @@ module.exports = function(cfg) {
         setSquare : setSquare
     };
 
-    return exports
+    return exports;
 };
