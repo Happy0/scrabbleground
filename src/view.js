@@ -78,6 +78,7 @@ var renderTile = function (ctrl, tile) {
                 // like a rack and remove it from its previous square in the model
                 var square = tile.containingSquare;
                 ctrl.data.board[square.x][square.y].tile = null;
+                tile.containingSquare = null;
             }
 
             // Jquery garauntees that event handlers are fired in the order that they were
