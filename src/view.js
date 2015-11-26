@@ -71,7 +71,7 @@ var renderTile = function (ctrl, tile) {
             var parent = ui.helper.parent();
 
             console.dir(parent);
-            if (!parent.hasClass('board-square'))
+            if (tile.containingSquare != null && !parent.hasClass('board-square'))
             {
                 // If the tile was dropped onto a square we let the drop handler for the square
                 // modify the board accordingly. Otherwise, we assume it was dropped on something
