@@ -102,9 +102,21 @@ var renderTile = function (ctrl, tile) {
 function renderSquare(ctrl, x, y, square) {
     var classes = [squareClasses[square.bonus], 'board-square'].join(" ");
 
+    var onDrop = function (event, ui) {
+        // Do stuff and things
+    };
+
+    var makeDroppable = function(element, isInitialised, context) {
+        if (isInitialised) return;
+
+
+        $(element).droppable({drop: onDrop});
+    };
+
     var attrs = {
         'data-square-pos-x' : x,
         'data-square-pos-y': y,
+        config: makeDroppable,
         class: classes,
         style : {
             left : x * 6.66667 + '%',
