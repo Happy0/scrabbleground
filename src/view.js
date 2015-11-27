@@ -1,6 +1,7 @@
 var m = require("mithril");
 var $ = require("jquery");
-require('jquery-ui/draggable')
+require('jquery-ui/draggable');
+require('jquery-ui/droppable');
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
@@ -104,11 +105,11 @@ function renderSquare(ctrl, x, y, square) {
 
     var onDrop = function (event, ui) {
         // Do stuff and things
+        console.info("droparooni!~");
     };
 
     var makeDroppable = function(element, isInitialised, context) {
         if (isInitialised) return;
-
 
         $(element).droppable({drop: onDrop});
     };
