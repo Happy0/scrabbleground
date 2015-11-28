@@ -89,7 +89,10 @@ var renderTile = function (ctrl, tile) {
         };
 
         var revert = "invalid";
-        $(element).draggable({start : startDrag, stop: stopDrag, revert: revert});
+        $(element).draggable({start : startDrag,
+                             stop: stopDrag,
+                             revert: revert,
+                             snap: ".board-square"});
     };
 
     return m('div', {config: makeDraggable, class: 'tile letter'}, [
@@ -111,7 +114,7 @@ function renderSquare(ctrl, x, y, square) {
     var makeDroppable = function(element, isInitialised, context) {
         if (isInitialised) return;
 
-        $(element).droppable({drop: onDrop});
+        $(element).droppable({drop: onDrop, accept: ".tile"});
     };
 
     var attrs = {
