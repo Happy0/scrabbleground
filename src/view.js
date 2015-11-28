@@ -107,9 +107,8 @@ function renderSquare(ctrl, x, y, square) {
     var classes = [squareClasses[square.bonus], 'board-square'].join(" ");
 
     var onDrop = function (event, ui) {
-        // Do stuff and things
-        console.info("droparooni!~");
-    };
+        $(ui.draggable).offset($(this).offset());
+     };
 
     var makeDroppable = function(element, isInitialised, context) {
         if (isInitialised) return;
