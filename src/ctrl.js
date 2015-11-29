@@ -15,16 +15,17 @@ module.exports = function(cfg) {
         data.revertFunfction = callback;
     };
 
-    var renderTileAt = function(tile, selector) {
-        var renderTile = view.renderTile(data.ctrl, tile);
-        m.render(selector, renderTile);
-    };
-
     var exports =  {
         data : data,
         makeTile : data.makeTile,
+        renderTileAt : null,
         setSquare : setSquare,
         setCustomRevertFunction : setCustomRevertFunction
+    };
+
+    exports.renderTileAt = function (tile, selector) {
+        var renderTile = view.renderTile(exports, tile);
+        m.render(selector, renderTile);
     };
 
     return exports;

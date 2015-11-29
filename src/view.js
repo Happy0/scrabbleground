@@ -106,7 +106,7 @@ var renderTile = function (ctrl, tile) {
 }
 
 function renderSquare(ctrl, x, y, square) {
-    var classes = [squareClasses[square.bonus], 'board-square'].join(" ");
+    var classes = ['board-square', squareClasses[square.bonus]].join(" ");
 
     var onDrop = function (event, ui) {
         var tile = ctrl.data.draggingTile;
