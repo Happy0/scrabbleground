@@ -2,6 +2,9 @@
 
 module.exports = function(controller) {
     return {
-        setSquare : controller.setSquare
+        makeTile : controller.makeTile,
+        renderTileAt : controller.renderTileAt,
+        setSquare : controller.setSquare,
+        setCustomRevertFunction : controller.setCustomRevertFunction
     };
 }
