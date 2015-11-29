@@ -107,6 +107,14 @@ function renderSquare(ctrl, x, y, square) {
     var classes = [squareClasses[square.bonus], 'board-square'].join(" ");
 
     var onDrop = function (event, ui) {
+        var tile = ctrl.data.draggingTile;
+        ctrl.data.draggingTile = null;
+        square.tile = tile;
+
+        console.info("tile");
+        console.dir(tile);
+        console.dir(ctrl.data);
+
         $(ui.draggable).offset($(this).offset());
      };
 
