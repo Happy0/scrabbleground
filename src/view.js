@@ -88,9 +88,14 @@ var renderTile = function (ctrl, tile) {
             ctrl.data.draggingTile = null;
         };
 
+        if (ctrl.data.doubleClickTileHandler)
+        {
+            $(element).dbclick(doubleClickTileHandler(element));
+        }
+
         // If the client has custom behaviour for dropping a candidate tile (such as to put it on a rack),
         // otherwise we send the tile back to where it came from
-        var revert = ctrl.data.revertFunction ? ctrl.data.revertFunction() : "invalid";
+        var revert = ctrl.data.revertTileHandler ? ctrl.data.revertTileHandler(element) : "invalid";
         $(element).draggable({start : startDrag,
                              stop: stopDrag,
                              revert: revert,

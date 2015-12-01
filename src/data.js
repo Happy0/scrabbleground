@@ -64,7 +64,9 @@ module.exports = function (cfg) {
         draggingTile : null, // The tile  that is currently being dragged
          // An optional custom function for determining where a tile goes when it is picked
          // up from a square and dropped outside the board
-         revertFunction: null
+         revertTileHandler: null,
+         // A callback to determine what should happen when a user double clicks a tile
+         doubleClickTileHandler : null
     };
 
     // Merge any specified configuration values with our defaults before returning
