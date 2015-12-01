@@ -11,6 +11,15 @@ module.exports = function(cfg) {
       m.redraw();
     };
 
+    var move = function(placed) {
+        placed.forEach(function(place) {
+            var x = place.x;
+            var y = place.y;
+            var tile = place.tile;
+            setSquare(x,y,tile);
+        })
+    };
+
     var setCustomRevertFunction = function(callback) {
         data.revertFunfction = callback;
     };
@@ -18,6 +27,7 @@ module.exports = function(cfg) {
     var exports =  {
         data : data,
         makeTile : data.makeTile,
+        move : move,
         renderTileAt : null,
         setSquare : setSquare,
         setCustomRevertFunction : setCustomRevertFunction

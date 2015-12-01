@@ -17,6 +17,11 @@
             var tile1 = {letter : 'a', value : 2, isCandidate: true};
             var tile2 = {letter : 'b', value : 2, isCandidate: true};
 
+            var place1 = {x: 4, y: 5, tile: tile1};
+            var place2 = {x: 3, y: 4, tile: tile2};
+
+            ground.move([place1, place2]);
+
             ground.renderTileAt(tile1, document.getElementById("baws"));
 
 
