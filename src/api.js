@@ -2,6 +2,8 @@
 
 module.exports = function(controller) {
     return {
-        setSquare : controller.setSquare
+        move : controller.move,
+        setSquare : controller.setSquare,
+        freezeBoard : controller.freezeBoard
     };
 }
