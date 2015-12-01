@@ -118,10 +118,6 @@ function renderSquare(ctrl, x, y, square) {
         ctrl.data.draggingTile = null;
         square.tile = tile;
 
-        console.info("tile");
-        console.dir(tile);
-        console.dir(ctrl.data);
-
         $(ui.draggable).offset($(this).offset());
      };
 
