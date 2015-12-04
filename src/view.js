@@ -3,7 +3,7 @@ var $ = require("jquery");
 require('jquery-ui');
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-var rows = columns;
+var rows = columns.slice().reverse();
 
 var squareClasses = {
     "N" : 'normal',
