@@ -32,12 +32,10 @@ var makeTile = function(letter, value, isCandidate) {
     return tile;
 }
 
-var makeSquare = function(x,y,tile, bonus) {
+var makeSquare = function(tile, bonus) {
     var square = {
         "tile" : tile,
-        "bonus" : bonus,
-        "x": x,
-        "y" : y
+        "bonus" : bonus
     };
 
     if (tile) {
@@ -50,9 +48,9 @@ var makeSquare = function(x,y,tile, bonus) {
 /**
  *  Create an empty board
  */
-var board = squareBonuses.map(function (row, x) {
-    return row.map(function(bonus, y) {
-        return makeSquare(x,y,null, bonus);
+var board = squareBonuses.map(function (row) {
+    return row.map(function(bonus) {
+        return makeSquare(null, bonus);
     })
 });
 
