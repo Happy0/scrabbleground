@@ -6,6 +6,8 @@ module.exports = function(controller) {
         makeTile : controller.makeTile,
         renderTileAt : controller.renderTileAt,
         setSquare : controller.setSquare,
+        getCandidateTiles : controller.getCandidateTiles,
+        freezeBoard : controller.freezeBoard,
         setCustomRevertFunction : controller.setCustomRevertFunction
     };
 }
