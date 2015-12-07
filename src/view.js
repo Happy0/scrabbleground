@@ -92,9 +92,16 @@ var renderTile = function (ctrl, tile) {
             $(element).dbclick(doubleClickTileHandler(element));
         }
 
+        var revertHandler = function() {
+            // If the consumer of the library has defined a custom revert function, we first remove
+            // the tile from its containing square before calling it
+            tile.containingSquare = null;
+            ctrl.data.reverttileHandler(element, tile);
+        };
+
         // If the client has custom behaviour for dropping a candidate tile (such as to put it on a rack),
         // otherwise we send the tile back to where it came from
-        var revert = ctrl.data.revertTileHandler ? ctrl.data.revertTileHandler(element) : "invalid";
+        var revert = ctrl.data.revertTileHandler ? revertHandler : "invalid";
         $(element).draggable({start : startDrag,
                              stop: stopDrag,
                              revert: revert,
