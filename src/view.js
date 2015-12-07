@@ -116,8 +116,17 @@ function renderSquare(ctrl, x, y, square) {
         ctrl.data.draggingTile = null;
         square.tile = tile;
 
+        if (tile.containingSquare != null)
+        {
+            tile.containingSquare.tile = null;
+        }
+
+        tile.containingSquare = square;
+
         ui.draggable.detach().appendTo(this);
         ui.draggable.attr("style", "position: relative; left: 0px; top: 0px; z-index: 10;");
+
+        console.dir(ctrl.data);
      };
 
     var makeDroppable = function(element, isInitialised, context) {
