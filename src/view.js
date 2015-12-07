@@ -13,14 +13,6 @@ var squareClasses = {
     'TW' : 'triple-word'
 };
 
-var bonusText = {
-    "N" : '',
-    'DL' : '2L',
-    'TL' : '3L',
-    'DW' : '2W',
-    'TW' : '3W'
-}
-
 // Compute once
 var allPositions = (function() {
     var positions = [];
@@ -124,7 +116,8 @@ function renderSquare(ctrl, x, y, square) {
         ctrl.data.draggingTile = null;
         square.tile = tile;
 
-        $(ui.draggable).offset($(this).offset());
+        ui.draggable.detach().appendTo(this);
+        ui.draggable.attr("style", "position: relative; left: 0px; top: 0px; z-index: 10;");
      };
 
     var makeDroppable = function(element, isInitialised, context) {
@@ -145,9 +138,8 @@ function renderSquare(ctrl, x, y, square) {
     };
 
     var textClasses = 'square-text';
-    var squareTextDiv = m('div', {class: textClasses}, bonusText[square.bonus]);
 
-    var squareChildren = [squareTextDiv];
+    var squareChildren = [];
 
     if (square.tile) {
         squareChildren.push(renderTile(ctrl, square.tile));
