@@ -68,11 +68,15 @@ module.exports = function(cfg) {
         data : data,
         makeTile : data.makeTile,
         move : move,
-        renderTileAt : null,
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,
         freezeBoard : freezeBoard,
         setCustomRevertFunction : setCustomRevertFunction
+    };
+
+
+    exports.makeMithrilTile = function(tile) {
+        view.renderTile(exports, tile);
     };
 
     exports.renderTileAt = function (tile, selector) {
