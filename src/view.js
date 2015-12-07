@@ -140,7 +140,7 @@ function renderSquare(ctrl, x, y, square) {
         class: classes,
         style : {
             left : x * 6.66667 + '%',
-            bottom : y * 6.66667 + '%'
+            top : y * 6.66667 + '%'
         }
     };
 

@@ -21,7 +21,47 @@ module.exports = function(cfg) {
     };
 
     var setCustomRevertFunction = function(callback) {
-        data.revertFunfction = callback;
+        data.revertFunction = callback;
+    };
+
+    var forEverySquare = function(func) {
+
+        data.board.forEach(function(column, x) {
+            column.forEach(function(square, y) {
+                func(square, x, y);
+            });
+        });
+
+    };
+
+    var getCandidateTiles = function() {
+        var candidates = [];
+
+        var pushIfCandidate = function(square, x, y) {
+            if (square.tile && square.tile.isCandidate) {
+                var candidate = {
+                    x : x,
+                    y : y,
+                    tile : square.tile
+                };
+
+                candidates.push(candidate);
+            }        
+        }
+
+        forEverySquare(pushIfCandidate);
+    
+        return candidates;
+    };
+
+    var freezeBoard = function () {
+        var freezeIfCandidate = function(square) {
+            if (square.tile && square.tile.isCandidate) {
+                square.tile.isCandidate = false;
+            }
+        }
+
+        forEverySquare(freezeIfCandidate);
     };
 
     var exports =  {
@@ -30,6 +70,8 @@ module.exports = function(cfg) {
         move : move,
         renderTileAt : null,
         setSquare : setSquare,
+        getCandidateTiles : getCandidateTiles,
+        freezeBoard : freezeBoard,
         setCustomRevertFunction : setCustomRevertFunction
     };
 
