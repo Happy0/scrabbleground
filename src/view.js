@@ -69,7 +69,7 @@ var renderTile = function (ctrl, tile) {
                 // modify the board accordingly. Otherwise, we assume it was dropped on something
                 // like a rack and remove it from its previous square in the model
                 var square = tile.containingSquare;
-                ctrl.data.board[square.x][square.y].tile = null;
+                square.tile = null;
                 tile.containingSquare = null;
             }
 
