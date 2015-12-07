@@ -76,7 +76,7 @@ module.exports = function(cfg) {
 
 
     exports.makeMithrilTile = function(tile) {
-        view.renderTile(exports, tile);
+        return view.renderTile(exports, tile);
     };
 
     exports.renderTileAt = function (tile, selector) {
