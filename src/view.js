@@ -88,7 +88,7 @@ var renderTile = function (ctrl, tile) {
             // If the consumer of the library has defined a custom revert function, we first remove
             // the tile from its containing square before calling it
             tile.containingSquare = null;
-            ctrl.data.revertTileHandler(element, tile);
+            ctrl.data.revertTileHandler(tile, element);
         };
 
         // If the client has custom behaviour for dropping a candidate tile (such as to put it on a rack),
