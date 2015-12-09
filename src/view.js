@@ -84,7 +84,9 @@ var renderTile = function (ctrl, tile) {
             $(element).dbclick(doubleClickTileHandler(element));
         }
 
-        var revertHandler = function() {
+        var revertHandler = function(droppedOnTo) {
+            console.dir(droppedOnTo);
+
             // If the consumer of the library has defined a custom revert function, we first remove
             // the tile from its containing square before calling it
             tile.containingSquare = null;
