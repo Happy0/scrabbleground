@@ -21,7 +21,7 @@ module.exports = function(cfg) {
     };
 
     var setCustomRevertFunction = function(callback) {
-        data.revertFunction = callback;
+        data.revertTileHandler = callback;
     };
 
     var setTileDroppedOnSquareListener = function(callback) {
