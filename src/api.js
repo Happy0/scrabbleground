@@ -8,6 +8,7 @@ module.exports = function(controller) {
         setSquare : controller.setSquare,
         getCandidateTiles : controller.getCandidateTiles,
         freezeBoard : controller.freezeBoard,
+        setTileDroppedOnSquareListener : controller.setTileDroppedOnSquareListener,
         setCustomRevertFunction : controller.setCustomRevertFunction
     };
 }

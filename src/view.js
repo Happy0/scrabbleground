@@ -126,6 +126,10 @@ function renderSquare(ctrl, x, y, square) {
         ui.draggable.detach().appendTo(this);
         ui.draggable.attr("style", "position: relative; left: 0px; top: 0px; z-index: 10;");
 
+        if (ctrl.data.tileDroppedOnSquareListener) {
+            ctrl.data.tileDroppedOnSquareListener(tile);
+        }
+
         console.dir(ctrl.data);
      };
 

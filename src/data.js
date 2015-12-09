@@ -59,7 +59,8 @@ module.exports = function (cfg) {
     var defaults = {
         board : board,
         viewOnly : false, // e.g. spectating or not the user's turn
-        draggingTile : null, // The tile  that is currently being dragged
+        draggingTile : null, // The tile  that is currently being dragged,
+        tileDroppedOnSquareListener : null,
          // An optional custom function for determining where a tile goes when it is picked
          // up from a square and dropped outside the board
          revertTileHandler: null,

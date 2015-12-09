@@ -24,6 +24,10 @@ module.exports = function(cfg) {
         data.revertFunction = callback;
     };
 
+    var setTileDroppedOnSquareListener = function(callback) {
+        data.tileDroppedOnSquareListener = callback;
+    }
+
     var forEverySquare = function(func) {
 
         data.board.forEach(function(column, x) {
@@ -46,11 +50,11 @@ module.exports = function(cfg) {
                 };
 
                 candidates.push(candidate);
-            }        
+            }
         }
 
         forEverySquare(pushIfCandidate);
-    
+
         return candidates;
     };
 
@@ -71,6 +75,7 @@ module.exports = function(cfg) {
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,
         freezeBoard : freezeBoard,
+        setTileDroppedOnSquareListener : setTileDroppedOnSquareListener,
         setCustomRevertFunction : setCustomRevertFunction
     };
 
