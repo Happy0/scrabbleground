@@ -85,7 +85,7 @@ var renderTile = function (ctrl, tile) {
         }
 
         var revertHandler = function(droppedOnTo) {
-            console.dir(droppedOnTo);
+            $(droppedOnTo).hasClass("board-square") return false;
 
             // If the consumer of the library has defined a custom revert function, we first remove
             // the tile from its containing square before calling it
