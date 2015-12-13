@@ -13,8 +13,8 @@ module.exports = function(cfg) {
 
     var move = function(placed) {
         placed.forEach(function(place) {
-            var x = place.x;
-            var y = place.y;
+            var x = place.pos.x;
+            var y = place.pos.y;
             var tile = place.tile;
             setSquare(x,y,tile);
         })
