@@ -1,6 +1,8 @@
 var m = require("mithril");
 var $ = require("jquery");
+window.$ = window.jQuery = $;
 require('jquery-ui');
+require('bootstrap');
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
@@ -45,6 +47,11 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
+var renderBlankTileModal = function(tile) {
+    return m('div', {id: 'assignBlankLetter', class: "modal fade", role: "dialog"}, "wwwweeee")
+};
+
+
 var renderTile = function (ctrl, tile) {
     var letter = tile.letter;
     var value = tile.value;
@@ -78,10 +85,12 @@ var renderTile = function (ctrl, tile) {
             // by the droppable listener
             ctrl.data.draggingTile = null;
         };
-
-        if (ctrl.data.doubleClickTileHandler)
-        {
-            $(element).dbclick(doubleClickTileHandler(element));
+        
+        // Blank tiles can be given a letter when double clicked
+        if (tile.value == 0) {
+            $(element).dblclick(function() {
+                $("#assignBlankLetter").modal();
+            });
         }
 
         var revertHandler = function(droppedOnTo) {
@@ -170,7 +179,7 @@ module.exports = function(ctrl) {
         'class' : 'sg-board-wrap'
     };
 
-    return m('div', attrs, renderBoard(ctrl));
+    return m('div', attrs, [renderBoard(ctrl), renderBlankTileModal()]);
 }
 
 module.exports.renderTile = renderTile;

@@ -63,9 +63,7 @@ module.exports = function (cfg) {
         tileDroppedOnSquareListener : null,
          // An optional custom function for determining where a tile goes when it is picked
          // up from a square and dropped outside the board
-         revertTileHandler: null,
-         // A callback to determine what should happen when a user double clicks a tile
-         doubleClickTileHandler : null
+         revertTileHandler: null
     };
 
     // Merge any specified configuration values with our defaults before returning

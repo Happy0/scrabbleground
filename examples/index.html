@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/base.css">
     </head>
     <div id="sg1" style="height:600px; width:600px;">
@@ -15,7 +16,7 @@
         (function() {
             var ground = Scrabbleground(document.getElementById("sg1"), {});
             var tile1 = {letter : 'a', value : 2, isCandidate: true};
-            var tile2 = {letter : 'b', value : 2, isCandidate: true};
+            var tile2 = {letter : '_', value : 0, isCandidate: true};
 
             var place1 = { pos : {x: 4, y: 5}, tile: tile1};
 
