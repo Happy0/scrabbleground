@@ -2,7 +2,6 @@ var m = require("mithril");
 var $ = require("jquery");
 window.$ = window.jQuery = $;
 require('jquery-ui');
-require('bootstrap');
 
 var columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var rows = columns;
@@ -47,16 +46,11 @@ function renderBoard(ctrl) {
     return m('div', attrs, childrenSquares);
 }
 
-var renderBlankTileModal = function(tile) {
-    return m('div', {id: 'assignBlankLetter', class: "modal fade", role: "dialog"}, "wwwweeee")
-};
-
-
 var renderTile = function (ctrl, tile) {
     var letter = tile.letter;
     var value = tile.value;
 
-    var makeDraggable = function(element, initialised, context) {
+    var addEventListeners = function(element, initialised, context) {
 
         // Only candidate tiles (e.g. tiles being played) are draggable.
         if (initialised || !tile.isCandidate) return;
@@ -85,11 +79,29 @@ var renderTile = function (ctrl, tile) {
             // by the droppable listener
             ctrl.data.draggingTile = null;
         };
-        
-        // Blank tiles can be given a letter when double clicked
-        if (tile.value == 0) {
+
+        if (value == 0) {
             $(element).dblclick(function() {
-                $("#assignBlankLetter").modal();
+                var letterTextElement = $(element).find(".lettertext");
+
+                letterTextElement.attr("contenteditable", "true");
+                letterTextElement.empty();
+                letterTextElement.focus();   
+
+                $(element).keydown(function(event) {
+                    var character = String.fromCharCode(event.which);
+
+                    if (character != "" && !isNaN(parseFloat(character))) {
+                        tile.letter = '_';
+                    }
+                    else
+                    {
+                        tile.letter = character;
+                    }
+
+                    letterTextElement.attr("contenteditable", false);
+                    letterTextElement.text(tile.letter);
+                });
             });
         }
 
@@ -111,8 +123,12 @@ var renderTile = function (ctrl, tile) {
                              snap: ".board-square"});
     };
 
-    return m('div', {config: makeDraggable, class: 'tile letter'}, [
-        m('div', {class: 'lettertext'}, letter),
+    var tileClasses = 'tile letter';
+    if (value == 0)
+        tileClasses = tileClasses.concat(" blank");
+
+    return m('div', {config: addEventListeners, class: tileClasses}, [
+        m('div', {class: 'lettertext', 'contenteditable': true}, letter),
         m('div', {class: 'value'},
             m('subscript', {}, value))
         ]
@@ -179,7 +195,7 @@ module.exports = function(ctrl) {
         'class' : 'sg-board-wrap'
     };
 
-    return m('div', attrs, [renderBoard(ctrl), renderBlankTileModal()]);
+    return m('div', attrs, [renderBoard(ctrl)]);
 }
 
 module.exports.renderTile = renderTile;

@@ -60,13 +60,14 @@
 
 .tile.blank {
     font-weight: bold;
-    font-color: red;
+    color: red;
 }
 
 .lettertext {
     top: 45%;
     right: 50%;
     position: absolute;
+    maxlength: 1;
 }
 
 .value {
