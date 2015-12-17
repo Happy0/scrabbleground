@@ -86,7 +86,7 @@ var renderTile = function (ctrl, tile) {
 
                 letterTextElement.attr("contenteditable", "true");
                 letterTextElement.empty();
-                letterTextElement.focus();   
+                letterTextElement.focus();
 
                 $(element).keydown(function(event) {
                     var character = String.fromCharCode(event.which);
@@ -110,6 +110,7 @@ var renderTile = function (ctrl, tile) {
 
             // If the consumer of the library has defined a custom revert function, we first remove
             // the tile from its containing square before calling it
+            tile.containingSquare.tile = null;
             tile.containingSquare = null;
             return ctrl.data.revertTileHandler(tile, element);
         };
