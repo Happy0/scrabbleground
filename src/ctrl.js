@@ -60,7 +60,7 @@ module.exports = function(cfg) {
     };
 
     var setBoardViewOnly = function (viewOnly) {
-        ctrl.data.viewOnly = viewOnly;
+        data.viewOnly = viewOnly;
     };
 
     var exports =  {
