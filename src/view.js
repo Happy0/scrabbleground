@@ -165,12 +165,7 @@ function renderSquare(ctrl, x, y, square) {
      };
 
     var makeDroppable = function(element, isInitialised, context) {
-        if (ctrl.data.viewOnly) {
-            $(element).droppable(false);
-            return;
-        }
-
-        $(element).droppable({drop: onDrop, accept: ".tile"});
+        $(element).droppable({drop: onDrop, accept: ".tile", disabled: ctrl.data.viewOnly});
     };
 
     var attrs = {
