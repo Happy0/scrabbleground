@@ -59,14 +59,8 @@ module.exports = function(cfg) {
         return candidates;
     };
 
-    var freezeBoard = function () {
-        var freezeIfCandidate = function(square) {
-            if (square.tile && square.tile.isCandidate) {
-                square.tile.isCandidate = false;
-            }
-        }
-
-        forEverySquare(freezeIfCandidate);
+    var setBoardViewOnly = function (viewOnly) {
+        ctrl.data.viewOnly = viewOnly;
     };
 
     var exports =  {
@@ -75,7 +69,7 @@ module.exports = function(cfg) {
         move : move,
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,
-        freezeBoard : freezeBoard,
+        setBoardViewOnly : setBoardViewOnly,
         setTileDroppedOnSquareListener : setTileDroppedOnSquareListener,
         setCustomRevertFunction : setCustomRevertFunction
     };

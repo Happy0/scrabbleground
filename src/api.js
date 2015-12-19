@@ -7,7 +7,7 @@ module.exports = function(controller) {
         renderTileAt : controller.renderTileAt,
         setSquare : controller.setSquare,
         getCandidateTiles : controller.getCandidateTiles,
-        freezeBoard : controller.freezeBoard,
+        setBoardViewOnly : controller.setBoardViewOnly,
         setTileDroppedOnSquareListener : controller.setTileDroppedOnSquareListener,
         setCustomRevertFunction : controller.setCustomRevertFunction
     };
