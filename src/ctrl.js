@@ -59,8 +59,17 @@ module.exports = function(cfg) {
         return candidates;
     };
 
+    var freezeBoard = function() {
+        forEverySquare(function(square) {
+            if (square.tile) {
+                square.tile.isCandidate = false;            
+            }
+        });
+    }
+
     var setBoardViewOnly = function (viewOnly) {
         data.viewOnly = viewOnly;
+        freezeBoard();
     };
 
     var exports =  {
