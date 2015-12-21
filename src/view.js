@@ -54,7 +54,10 @@ var renderTile = function (ctrl, tile) {
 
         // Only candidate tiles (e.g. tiles being played) are draggable.
         if (!tile.isCandidate) {
-            $(element).draggable('disable');
+            if ($(element).is('ui-draggable')) {
+                $(element).draggable('disable');
+            }
+
             return;
         }
 
