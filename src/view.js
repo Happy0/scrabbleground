@@ -53,7 +53,10 @@ var renderTile = function (ctrl, tile) {
     var addEventListeners = function(element, initialised, context) {
 
         // Only candidate tiles (e.g. tiles being played) are draggable.
-        if (!tile.isCandidate) return;
+        if (!tile.isCandidate) {
+            $(element).draggable('disable');
+            return;
+        }
 
         var startDrag = function() {
             ctrl.data.draggingTile = tile;
