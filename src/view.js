@@ -53,8 +53,9 @@ var renderTile = function (ctrl, tile) {
     var addEventListeners = function(element, initialised, context) {
 
         // Only candidate tiles (e.g. tiles being played) are draggable.
-        if (!tile.isCandidate) {
-            if ($(element).is('ui-draggable')) {
+        if (!
+            tile.isCandidate) {
+            if ($(element).hasClass('ui-draggable')) {
                 $(element).draggable('disable');
             }
 
