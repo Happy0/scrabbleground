@@ -172,6 +172,16 @@ function renderSquare(ctrl, x, y, square) {
      };
 
     var makeDroppable = function(element, isInitialised, context) {
+        if (square.tile && !square.tile.isCandidate && $(element).hasClass('ui-droppable')) {
+            $(element).droppable('option', 'disabled', true);
+            return;
+        }
+        else if ($(element).hasClass('ui-droppable'))
+        {
+            // Already initialised
+            return;
+        }
+
         $(element).droppable({drop: onDrop, accept: ".tile", disabled: ctrl.data.viewOnly});
     };
 

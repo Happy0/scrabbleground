@@ -15,7 +15,7 @@
     <script>
         (function() {
             var ground = Scrabbleground(document.getElementById("sg1"), {});
-            var tile1 = {letter : 'a', value : 2, isCandidate: true};
+            var tile1 = {letter : 'a', value : 2};
             var tile2 = {letter : 'b', value : 0, isCandidate: true};
 
             var place1 = { pos : {x: 4, y: 5}, tile: tile1};
@@ -24,8 +24,6 @@
 
             console.info("candidates: ");
             console.dir(ground.getCandidateTiles());
-
-            ground.freezeBoard();
 
             console.info("candidates after freezing:")
             console.dir(ground.getCandidateTiles());
