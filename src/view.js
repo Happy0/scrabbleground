@@ -181,6 +181,10 @@ function renderSquare(ctrl, x, y, square) {
         else if ($(element).hasClass('ui-droppable'))
         {
             // already initialised, don't register multiple callbacks
+            if (!ctrl.data.viewOnly)
+            {
+               $(element).droppable("enable");
+            }
             return;
         }
 
