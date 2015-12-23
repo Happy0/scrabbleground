@@ -172,17 +172,19 @@ function renderSquare(ctrl, x, y, square) {
      };
 
     var makeDroppable = function(element, isInitialised, context) {
-        if (square.tile && !square.tile.isCandidate && $(element).hasClass('ui-droppable')) {
+        if (square.tile && !square.tile.isCandidate && $(element).hasClass('ui-droppable') || ctrl.data.viewOnly) {
+            // If a tile has already been placed on the square that is not one of our candidate tiles,
+            // make sure we can't drop on top of it
             $(element).droppable('option', 'disabled', true);
             return;
         }
         else if ($(element).hasClass('ui-droppable'))
         {
-            // Already initialised
+            // already initialised, don't register multiple callbacks
             return;
         }
 
-        $(element).droppable({drop: onDrop, accept: ".tile", disabled: ctrl.data.viewOnly});
+        $(element).droppable({drop: onDrop, accept: ".tile"});
     };
 
     var attrs = {
