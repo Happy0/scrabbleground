@@ -70,17 +70,6 @@ var renderTile = function (ctrl, tile) {
             console.dir(ui.helper.parent());
             var parent = ui.helper.parent();
 
-            console.dir(parent);
-            if (tile.containingSquare != null && !parent.hasClass('board-square'))
-            {
-                // If the tile was dropped onto a square we let the drop handler for the square
-                // modify the board accordingly. Otherwise, we assume it was dropped on something
-                // like a rack and remove it from its previous square in the model
-                var square = tile.containingSquare;
-                square.tile = null;
-                tile.containingSquare = null;
-            }
-
             // Jquery garauntees that event handlers are fired in the order that they were
             // bound, so we can assume that the 'draggingTile' has already been used
             // by the droppable listener
@@ -154,9 +143,11 @@ function renderSquare(ctrl, x, y, square) {
         ctrl.data.draggingTile = null;
         square.tile = tile;
 
-        if (tile.containingSquare != null)
+        if (tile.containingSquare != null && tile.containingSquare !== square)
         {
-            tile.containingSquare.tile = null;
+            var sq = tile.containingSquare;
+            sq.tile = null;
+            tile.containingSquare = null;
         }
 
         tile.containingSquare = square;
