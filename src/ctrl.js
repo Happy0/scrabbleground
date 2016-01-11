@@ -63,10 +63,33 @@ module.exports = function(cfg) {
         data.viewOnly = viewOnly;
     };
 
+    /**
+     * Removes any candidate tiles put on to the board and returns all the removed
+     * tiles are as an array
+     */
+    var removeCandidateTiles = function () {
+        var removed = [];
+
+        m.startComputation();
+        var removeIfCandidate = function (square) {
+            if (square.tile && square.tile.isCandidate) {
+                square.tile.containingSquare = null;
+                removed.push(square.tile);
+                square.tile = null;
+            };
+        };
+
+        forEverySquare(removeIfCandidate);
+        m.endComputation();
+
+        return removed;
+    }
+
     var exports =  {
         data : data,
         makeTile : data.makeTile,
         move : move,
+        removeCandidateTiles : removeCandidateTiles,
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,
         setBoardViewOnly : setBoardViewOnly,
