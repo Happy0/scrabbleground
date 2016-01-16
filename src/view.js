@@ -53,7 +53,14 @@ var renderTile = function (ctrl, tile) {
     var addEventListeners = function(element, initialised, context) {
 
         // Only candidate tiles (e.g. tiles being played) are draggable.
-        if (!tile.isCandidate) return;
+        if (!
+            tile.isCandidate) {
+            if ($(element).hasClass('ui-draggable')) {
+                $(element).draggable('disable');
+            }
+
+            return;
+        }
 
         var startDrag = function() {
             ctrl.data.draggingTile = tile;
@@ -62,17 +69,6 @@ var renderTile = function (ctrl, tile) {
         var stopDrag = function(event, ui) {
             console.dir(ui.helper.parent());
             var parent = ui.helper.parent();
-
-            console.dir(parent);
-            if (tile.containingSquare != null && !parent.hasClass('board-square'))
-            {
-                // If the tile was dropped onto a square we let the drop handler for the square
-                // modify the board accordingly. Otherwise, we assume it was dropped on something
-                // like a rack and remove it from its previous square in the model
-                var square = tile.containingSquare;
-                square.tile = null;
-                tile.containingSquare = null;
-            }
 
             // Jquery garauntees that event handlers are fired in the order that they were
             // bound, so we can assume that the 'draggingTile' has already been used
@@ -147,9 +143,11 @@ function renderSquare(ctrl, x, y, square) {
         ctrl.data.draggingTile = null;
         square.tile = tile;
 
-        if (tile.containingSquare != null)
+        if (tile.containingSquare != null && tile.containingSquare !== square)
         {
-            tile.containingSquare.tile = null;
+            var sq = tile.containingSquare;
+            sq.tile = null;
+            tile.containingSquare = null;
         }
 
         tile.containingSquare = square;
@@ -165,7 +163,23 @@ function renderSquare(ctrl, x, y, square) {
      };
 
     var makeDroppable = function(element, isInitialised, context) {
-        $(element).droppable({drop: onDrop, accept: ".tile", disabled: ctrl.data.viewOnly});
+        if (square.tile && !square.tile.isCandidate && $(element).hasClass('ui-droppable') || ctrl.data.viewOnly) {
+            // If a tile has already been placed on the square that is not one of our candidate tiles,
+            // make sure we can't drop on top of it
+            $(element).droppable('option', 'disabled', true);
+            return;
+        }
+        else if ($(element).hasClass('ui-droppable'))
+        {
+            // already initialised, don't register multiple callbacks
+            if (!ctrl.data.viewOnly)
+            {
+               $(element).droppable("enable");
+            }
+            return;
+        }
+
+        $(element).droppable({drop: onDrop, accept: ".tile"});
     };
 
     var attrs = {
