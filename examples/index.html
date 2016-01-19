@@ -11,6 +11,10 @@
 
     </square>
 
+    <square style="height: 42px; width: 42px;" class="board-square" id="baws2">
+
+    </square>
+
     <script src="../scrabbleground.js"></script>
     <script>
         (function() {
@@ -29,6 +33,7 @@
             console.dir(ground.getCandidateTiles());
 
             ground.renderTileAt(tile2, document.getElementById("baws"));
+            ground.renderTileAt(tile2, document.getElementById("baws2"));
 
 
         })();
