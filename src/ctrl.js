@@ -21,6 +21,14 @@ module.exports = function(cfg) {
         })
     };
 
+    var highlightMove = function(placedPositions, isHorizontal) {
+
+    };
+
+    var removeAllHighlightedTiles = function() {
+
+    };
+
     var setCustomRevertFunction = function(callback) {
         data.revertTileHandler = callback;
     };
@@ -62,7 +70,7 @@ module.exports = function(cfg) {
     var freezeBoard = function() {
         forEverySquare(function(square) {
             if (square.tile) {
-                square.tile.isCandidate = false;            
+                square.tile.isCandidate = false;
             }
         });
     }
@@ -98,6 +106,8 @@ module.exports = function(cfg) {
         data : data,
         makeTile : data.makeTile,
         move : move,
+        highlightMove,
+        removeAllHighlightedTiles,
         removeCandidateTiles : removeCandidateTiles,
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,

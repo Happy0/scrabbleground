@@ -63,7 +63,11 @@ module.exports = function (cfg) {
         tileDroppedOnSquareListener : null,
          // An optional custom function for determining where a tile goes when it is picked
          // up from a square and dropped outside the board
-         revertTileHandler: null
+         revertTileHandler: null,
+         highlightedTilePlacedClass : null, // The class to use to highlight a placed tile when a move is highllighted
+         highlightedTileAlreadyPlacedClass : null, // The class to use to highlight a tile that was already on the board when a move is placed.
+         highlightMoveMainWordClass: null, // The class to use to highlight the main word created when highlighting a move
+         highlightedTileBonusSquareClass, null // The class to use to make apparent that a tile placed on a move was over a bonus square
     };
 
     // Merge any specified configuration values with our defaults before returning
@@ -72,4 +76,3 @@ module.exports = function (cfg) {
 
     return defaults;
 }
-
