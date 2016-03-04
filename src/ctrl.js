@@ -1,9 +1,12 @@
 var d = require("./data");
 var view = require("./view");
 var m = require("mithril");
+var h = require("./highlight");
 
 module.exports = function(cfg) {
     var data = d(cfg);
+
+    var highlight = h(data);
 
     var setSquare = function(x, y, tile) {
       m.startComputation();
@@ -19,14 +22,6 @@ module.exports = function(cfg) {
             var tile = place.tile;
             setSquare(x,y,tile);
         })
-    };
-
-    var highlightMove = function(placedPositions, isHorizontal) {
-
-    };
-
-    var removeAllHighlightedTiles = function() {
-
     };
 
     var setCustomRevertFunction = function(callback) {
@@ -106,8 +101,7 @@ module.exports = function(cfg) {
         data : data,
         makeTile : data.makeTile,
         move : move,
-        highlightMove,
-        removeAllHighlightedTiles,
+        highlight: highlight,
         removeCandidateTiles : removeCandidateTiles,
         setSquare : setSquare,
         getCandidateTiles : getCandidateTiles,
