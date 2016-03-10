@@ -7,7 +7,7 @@ module.exports = function(data, board) {
     bonusSquarePlaced: data.highlightedTileBonusSquareClass
   };
 
-  var highlightMove = function(placedPositions, isHorizontal) {
+  var highlightMove = function(placedMoveSummary) {
 
   };
 
