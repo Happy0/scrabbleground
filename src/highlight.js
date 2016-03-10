@@ -1,4 +1,4 @@
-module.exports = function(data) {
+module.exports = function(data, board) {
 
   var highlightTypeToClass = {
     newlyPlaced : data.highlightedTilePlacedClass,
@@ -12,9 +12,14 @@ module.exports = function(data) {
   };
 
   var removeAllHighlightedTiles = function() {
+    var removeHighlight = function (square) {
+      if (square.tile) {
+        delete square.tile.highlightClass;
+      }
+    };
 
+    board.forEverySquare(removeHighlight);
   };
-
 
   return {
     highlightMove : highlightMove,

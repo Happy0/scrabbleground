@@ -2,11 +2,14 @@ var d = require("./data");
 var view = require("./view");
 var m = require("mithril");
 var h = require("./highlight");
+var b = require("./board");
 
 module.exports = function(cfg) {
     var data = d(cfg);
 
-    var highlight = h(data);
+    var board = b(data);
+
+    var highlight = h(data, board);
 
     var setSquare = function(x, y, tile) {
       m.startComputation();
@@ -32,15 +35,7 @@ module.exports = function(cfg) {
         data.tileDroppedOnSquareListener = callback;
     }
 
-    var forEverySquare = function(func) {
-
-        data.board.forEach(function(column, x) {
-            column.forEach(function(square, y) {
-                func(square, x, y);
-            });
-        });
-
-    };
+    var forEverySquare = board.forEverySquare;
 
     var getCandidateTiles = function() {
         var candidates = [];
