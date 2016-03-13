@@ -7,7 +7,7 @@ module.exports = function(data, board) {
     bonusSquarePlaced: data.highlightedTileBonusSquareClass
   };
 
-  var getContiguousFiles = function(direction, startPosition) {
+  var getContiguousTiles = function(direction, startPosition) {
     var currentX = startPosition.x;
     var currentY = startPosition.y;
 
@@ -53,6 +53,12 @@ module.exports = function(data, board) {
   var highlightMove = function(placedMoveSummary) {
     var placed = placedMoveSummary.placed;
     var direction = placedMoveSummary.direction;
+
+    var mainWord = getContiguousFiles(direction, placed[0]);
+
+    mainWord.forEach(function(tile) {
+      tile.highlightClasses = highlightTypeToClass[mainWord];
+    });
   };
 
   var removeAllHighlightedTiles = function() {

@@ -127,6 +127,9 @@ var renderTile = function (ctrl, tile) {
     if (value == 0)
         tileClasses = tileClasses.concat(" blank");
 
+    if (tile.highlightClasses)
+      tileClasses = tileClasses.concat(" ").concat(tile.highlightClasses);
+
     return m('div', {config: addEventListeners, class: tileClasses}, [
         m('div', {class: 'lettertext', 'contenteditable': true}, letter),
         m('div', {class: 'value'},
