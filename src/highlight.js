@@ -7,54 +7,79 @@ module.exports = function(data, board) {
     bonusSquarePlaced: data.highlightedTileBonusSquareClass
   };
 
-  var getContiguousTiles = function(direction, startPosition) {
-    var currentX = startPosition.x;
-    var currentY = startPosition.y;
+  var getTilesAheadOf = function(x, y, direction) {
+    var tiles = [];
+    var x = direction == "horizontal" ? x + 1  : x;
+    var y = direction == "vertical" ? y + 1 : y;
 
-    var incrementerInDirection = function () {
-      if (direction === "horizontal") {
-        currentX += 1;
-      } else {
-        currentY +=1;
-      }
-    }
+    var nextTile = data.board[x][y].tile;
+    while (nextTile) {
+      tiles.push(nextTile);
 
-    var decrementerInDirection = function () {
-      if (direction === "horizontal") {
-        currentX -= 1;
+      if (direction == "horizontal") {
+        x = x + 1;
       }
       else {
-        currentY -=1;
+        y = y + 1;
+      }
+
+      var square = data.board[x][y];
+      if (square && square.tile) {
+        nextTile = square.tile;
+      }
+      else {
+        nextTile = null;
       }
     }
 
+    return tiles;
+  };
+
+  var getTilesBehind = function(x, y, direction) {
     var tiles = [];
+    var x = direction == "horizontal" ? x - 1  : x;
+    var y = direction == "vertical" ? y - 1 : y;
 
-    var walkAndPushTilesInDirection = function(incremeneterOrDecrementerFunction) {
-      // Reset and go in the other direction
-      currentX = startPosition.x;
-      currentY = startPosition.y;
+    var nextTile = data.board[x][y].tile;
+    while (nextTile) {
+      tiles.push(nextTile);
 
-      do {
-        var currentTile = data.board[x][y].tile;
-        tiles.push(currentTile);
+      if (direction == "horizontal") {
+        x = x - 1;
+      }
+      else {
+        y = y - 1;
+      }
 
-        incremeneterOrDecrementerFunction();
-
-      } while (currentTile);
-    };
-
-    walkAndPushTilesInDirection(incrementerInDirection);
-    walkAndPushTilesInDirection(decrementerInDirection);
+      var square = data.board[x][y];
+      if (square && square.tile) {
+        nextTile = square.tile;
+      }
+      else {
+        nextTile = null;
+      }
+    }
 
     return tiles;
+  };
+
+  var getContiguousTiles = function(direction, startPosition) {
+    var startX = startPosition.x - 1;
+    var startY = startPosition.y - 1;
+
+    var startTile = data.board[startX][startY].tile;
+
+    var behindStartTile = getTilesAheadOf(startX, startY, direction);
+    var aheadStartTile = getTilesBehind(startX, startY, direction);
+
+    return [].concat(behindStartTile).concat([startTile]).concat(aheadStartTile);
   };
 
   var highlightMove = function(placedMoveSummary) {
     var placed = placedMoveSummary.placed;
     var direction = placedMoveSummary.direction;
 
-    var mainWord = getContiguousFiles(direction, placed[0]);
+    var mainWord = getContiguousTiles(direction, placed[0]);
 
     mainWord.forEach(function(tile) {
       tile.highlightClasses = highlightTypeToClass[mainWord];
