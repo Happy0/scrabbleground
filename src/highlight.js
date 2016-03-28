@@ -1,5 +1,7 @@
 module.exports = function(data, board) {
 
+  var m = require("mithril");
+
   var highlightTypeToClass = {
     newlyPlaced : data.highlightedTilePlacedClass,
     alreadyPlaced : data.highlightedTileAlreadyPlacedClass,
@@ -12,11 +14,17 @@ module.exports = function(data, board) {
     x = x + changeX;
     y = y + changeY;
 
+    if (!data.board[x] || !data.board[x][y])
+      return tiles;
+
     var nextTile = data.board[x][y].tile;
     while (nextTile) {
       tiles.push(nextTile);
       x = x + changeX;
       y = y + changeY;
+
+      if (!data.board[x] || !data.board[x][y])
+        return tiles;
 
       var square = data.board[x][y];
       if (square && square.tile) {
@@ -65,18 +73,19 @@ module.exports = function(data, board) {
     var mainWord = getContiguousTiles(direction, placed[0]);
 
     mainWord.forEach(function(tile) {
-      tile.highlightClasses = highlightTypeToClass[mainWord];
+      tile.highlightClasses = highlightTypeToClass['mainWord'];
     });
   };
 
-  var removeAllHighlightedTiles = function() {
-    var removeHighlight = function (square) {
-      if (square.tile) {
-        delete square.tile.highlightClass;
-      }
-    };
+  var removeHighlight = function (square) {
+    if (square.tile) {
+      delete square.tile.highlightClasses;
+    }
+  };
 
+  var removeAllHighlightedTiles = function() {
     board.forEverySquare(removeHighlight);
+    m.redraw();
   };
 
   return {
