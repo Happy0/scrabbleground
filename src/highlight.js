@@ -7,21 +7,16 @@ module.exports = function(data, board) {
     bonusSquarePlaced: data.highlightedTileBonusSquareClass
   };
 
-  var getTilesAheadOf = function(x, y, direction) {
+  var getTilesLine = function(x, y, changeX, changeY) {
     var tiles = [];
-    var x = direction == "horizontal" ? x + 1  : x;
-    var y = direction == "vertical" ? y + 1 : y;
+    x = x + changeX;
+    y = y + changeY;
 
     var nextTile = data.board[x][y].tile;
     while (nextTile) {
       tiles.push(nextTile);
-
-      if (direction == "horizontal") {
-        x = x + 1;
-      }
-      else {
-        y = y + 1;
-      }
+      x = x + changeX;
+      y = y + changeY;
 
       var square = data.board[x][y];
       if (square && square.tile) {
@@ -35,32 +30,20 @@ module.exports = function(data, board) {
     return tiles;
   };
 
-  var getTilesBehind = function(x, y, direction) {
-    var tiles = [];
-    var x = direction == "horizontal" ? x - 1  : x;
-    var y = direction == "vertical" ? y - 1 : y;
-
-    var nextTile = data.board[x][y].tile;
-    while (nextTile) {
-      tiles.push(nextTile);
-
+  var getTilesAheadOf = function(x, y, direction) {
       if (direction == "horizontal") {
-        x = x - 1;
+        return getTilesLine(x, y, 1, 0)
+      } else {
+        return getTilesLine(x, y, 0, 1)
       }
-      else {
-        y = y - 1;
-      }
+  };
 
-      var square = data.board[x][y];
-      if (square && square.tile) {
-        nextTile = square.tile;
-      }
-      else {
-        nextTile = null;
-      }
+  var getTilesBehind = function(x, y, direction) {
+    if (direction == "horizontal") {
+      return getTilesLine(x, y, -1, 0);
+    } else {
+      return getTilesLine(x, y, 0, -1);
     }
-
-    return tiles;
   };
 
   var getContiguousTiles = function(direction, startPosition) {
